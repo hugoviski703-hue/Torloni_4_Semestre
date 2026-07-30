@@ -15,7 +15,7 @@
     width: 100%;
     height: calc(100vh - 110px);
     padding: 20px;
-    border: 1px solid blue;
+    /* border: 1px solid blue; */
 }
 
 .cad-task{

@@ -1,7 +1,9 @@
 import iconEdit from "./assets/Vector (1).svg"
 import trashEdit from "./assets/Vector.svg"
 import './App.css'
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import axios from "axios"
+
 
 function App() {
   // states e variáveis
@@ -15,15 +17,36 @@ function App() {
   //em seguida fazer um map e gerar os cards (article)
   //com todas as tarefas
 
-    const [tasklist, setlist] = useState([
-      {id: 1, descricao: "estudar react js"},
-      {id: 2, descricao: "Revisar reactJs"},
-      {id: 3, descricao: "Revisar html semântica"},
-      {id: 4, descricao: "estudar react js"},
-    ]);
+  const [tasklist, setTasklist] = useState([]);
 
+  //CRUD
 
+  //  READ
+  // GET
+  const getTask = async () => {
+    //chamar a api
+    try {
+      const APIReturn = await axios.get("http://localhost:3000/taskpoint")
+      const dataAPI =await APIReturn.data
+      //armazenar os dados no state
+      console.log(dataAPI)
+      setTasklist(dataAPI)
+    } catch (error) {
+      
+    }
 
+  }
+  // POST
+  const postTask = () => {}
+  // PUT
+  const putTask = () => {}
+  // DELETE
+  const deleteTask = () => {}
+
+// montagem do componente - ciclo de vida dos componentes
+  useEffect(()=>{
+    getTask()
+  }, [])
   // funções e effects
 
   return (
@@ -41,33 +64,33 @@ function App() {
         <section className="cardlist">
 
           {
-          tasklist.map(task => {
-            return(
-              //colocat o article todo
-              <article className="cardtask">
-            <p className="cardtask__task-text">{task.descricao}</p>
+            tasklist.map(task => {
+              return (
+                //colocat o article todo
+                <article className="cardtask">
+                  <p className="cardtask__task-text">{task.descricao}</p>
 
-            <div className="cardtask__icon-box">
+                  <div className="cardtask__icon-box">
 
-              <div className="cardlist__icon">  <img
-                src={iconEdit}
-                alt="Imagem de uma caneta - ação editar tarefa" /></div>
-            
-              <div className="cardlist__icon">
-                <img
-                  src={trashEdit}
-                  alt="Imagem de uma lixeria - ação excluir tarefa" />
-              </div>
+                    <div className="cardlist__icon">  <img
+                      src={iconEdit}
+                      alt="Imagem de uma caneta - ação editar tarefa" /></div>
 
-            </div>
+                    <div className="cardlist__icon">
+                      <img
+                        src={trashEdit}
+                        alt="Imagem de uma lixeria - ação excluir tarefa" />
+                    </div>
 
-          </article>
+                  </div>
 
-            )
-          })
+                </article>
+
+              )
+            })
           }
 
-          
+
         </section>
 
       </main>
