@@ -1,6 +1,6 @@
 import { StyleSheet } from "react-native";
 
-export const Styles = StyleSheet.create({
+export const FormTaskStyles = StyleSheet.create({
     frmCadTask: {
         width: "100%",
         height: 30,

@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
 //style do header
-export const Styles = StyleSheet.create({
+export const HeaderStyles = StyleSheet.create({
     header: {
         justifyContent: "center",
         alignItems: "center",
