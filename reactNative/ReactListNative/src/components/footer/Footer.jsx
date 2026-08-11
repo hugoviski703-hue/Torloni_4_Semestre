@@ -1,9 +1,9 @@
 import {Text, View} from "react-native"
-import { TaskItemStyle } from "../taskitem/TaskItemStyle"
+import { FooterStyle } from "./FooterStyle"
 
 export const  Footer = () =>{
     return(
-        <View style={TaskItemStyle.cardBox}>
+        <View style={FooterStyle.cardBox}>
             <Text>Item cdlsdksdkjshj</Text>
         </View>
     )
