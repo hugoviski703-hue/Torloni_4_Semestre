@@ -1,62 +1,30 @@
-    import { ScrollView } from "react-native"
-    import { TaskListStyle } from "./TaskListStyle"
-    import { TaskItem } from "../taskitem/TaskItem"
-    import { useEffect, useState } from "react"
-    import axios from "axios";
+import { ScrollView } from "react-native"
+import { TaskListStyle } from "./TaskListStyle"
+import { TaskItem } from "../taskitem/TaskItem"
+import { useContext, useEffect, useState } from "react"
+import { TaskContext } from "../../context/TaskContext";
 
-    export const TaskList = () => {
-        const [listaTarefas, setListaTarefas] = useState([
-        
-        ])
+export const TaskList = () => {
+    const { listagemTarefas, getTasks } = useContext(TaskContext)//dados global context
 
-        //criar as funções
-        //getTasks
-        const getTasks = async () =>{
-            try {
-                const APIReturn = await axios.get("http://172.16.2.65:3000/taskpoint")
-                const APIData = await APIReturn.data
+       useEffect(() => {
+                getTasks()
+            }, [])
+    return (
+        <ScrollView style={TaskListStyle.taskListContainer}>
+            {
+                listagemTarefas.map((tarefa) => {
+                    return (
 
-                setListaTarefas(APIData)
-            } 
-            catch (error) {
-                console.log("Deu ruim na chamada da api")
-                console.log(error)
+                        <TaskItem
+                            key={tarefa.id}
+                            id={tarefa.id}
+                            // dados={tarefa.id}
+                            descricao={tarefa.descricao} />
+                    )
+                })
             }
-        }
-        //////////////////////////////////
-        //cadTask
-        const cadTask = async () =>{
-        
-        
-        }
-        ////////////////////////
-        //putTask
-        const putTask = (id, novaDescricao) =>{
-            const novaLista = listaTarefas.map((tarefa) =>{
-                if(tarefa.id === id) {
-                    return{
-                        tarefa,
-                        descricao: novaDescricao
-                    };
-                }
-                return tarefa
-            })
-        }
-        //////////////////////
-        //deleteTask
-    
+        </ScrollView>
 
-        return (
-            <ScrollView style={TaskListStyle.taskListContainer}>
-                {
-                    listaTarefas.map((tarefa) => {
-                        return (
-
-                            <TaskItem dados={tarefa}/>
-                        )
-                    })
-                }
-            </ScrollView>
-
-        )
-    }
+    )
+}

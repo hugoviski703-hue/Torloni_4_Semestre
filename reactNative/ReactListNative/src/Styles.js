@@ -9,9 +9,9 @@ export const Styles = StyleSheet.create({
     container:{
         flex: 1,
         backgroundColor: "#1d2135",
-        borderWidth: 3,
-        borderStyle: "solid",
-        borderColor: "red",
+        // borderWidth: 3,
+        // borderStyle: "solid",
+        // borderColor: "red",
         color: "#fff",
         paddingLeft: 20,
         paddingRight: 20
