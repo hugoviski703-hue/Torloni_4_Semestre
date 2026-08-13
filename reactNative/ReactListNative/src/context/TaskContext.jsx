@@ -1,5 +1,6 @@
 import { createContext, useState } from "react";
-import axios from "axios";
+// import axios from "axios";
+import api from "../services/FakeAPIService";
 
 export const TaskContext = createContext()
 
@@ -12,7 +13,7 @@ export const TaskProvider = ({ children }) => {
     //getTasks
     const getTasks = async () => {
         try {
-            const APIReturn = await axios.get("http://172.16.2.65:3000/taskpoint")
+            const APIReturn = await api.get("/taskpoint")
             const APIData = await APIReturn.data
 
             setListagemTarefas(APIData)
@@ -27,7 +28,7 @@ export const TaskProvider = ({ children }) => {
     //postTask
     const postTask = async (taskValue) => {
         try {
-            await axios.post("http://172.16.2.65:3000/taskpoint", { descricao: taskValue })
+            await api.post("/taskpoint", { descricao: taskValue })
             await getTasks()
             setTaskValue("")//limpa o campo
         } catch (error) {
@@ -39,7 +40,7 @@ export const TaskProvider = ({ children }) => {
     //putTask
     const putTask = async () => {
         try {
-            await axios.put(`http://172.16.2.65:3000/taskpoint/${idToEdit}`,
+            await api.put(`/taskpoint/${idToEdit}`,
                 {
                     descricao: taskValue
 
@@ -63,8 +64,8 @@ export const TaskProvider = ({ children }) => {
     //////////////////////
     const deleteTask = async (id) => {
         try {
-            await axios.delete(
-                `http://172.16.2.65:3000/taskpoint/${id}`
+            await api.delete(
+                `/taskpoint/${id}`
             )
 
             await getTasks()
